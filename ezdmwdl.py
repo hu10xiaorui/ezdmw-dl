@@ -1,6 +1,7 @@
 import os
 import platform
 import re
+import wget
 if platform.system() == "Windows":
     cpt = os.popen('''chcp''').read()
     cp = re.sub('[^0-9]','', cpt)
@@ -21,6 +22,6 @@ for v in range(hv):
     vurl=vp[dvp+13:dvep]
     print("视频地址：",vp[dvp+13:dvep])
     print("下载第"+str(v+1)+"集中...")
-    os.system('''curl --keepalive-time 10 -o '''+str(v+1)+'''.mp4 "'''+vp[dvp+13:dvep]+'''"''')
+    wget.download(vp[dvp+13:dvep], str(v+1)+'''.mp4 "''')
     print("视频下载成功")
 os.system("chcp "+cp)
