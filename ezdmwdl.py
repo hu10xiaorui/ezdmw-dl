@@ -10,12 +10,8 @@ if platform.system() == "Windows":
 vidl = input("输入番剧链接：")
 hv = int(input("输入集数："))
 browser = input("使用浏览器下载？(建议使用浏览器)（y/n）：").lower()
-# vids = vidl.find("html5/")
-# vide = vidl.find(".html")
-# vid = vidl[vids+6:vide]
-# print("视频id：",vid)
 videourll=[]
-vp = os.popen('''curl --keepalive-time 10  --retry-delay 3 --retry-max-time 0  --retry 100 "'''+vidl+'''"''').read().replace("\n","")
+vp = os.popen('''curl --keepalive-time 10  --insecure  --retry-delay 3 --retry-max-time 0  --retry 100 "'''+vidl+'''"''').read().replace("\n","")
 urllsp=vp.find("国内高速节点")
 urllep=vp.find('''<span class="1">1</span>''')
 urll=vp[urllsp+12:urllep]
@@ -31,7 +27,7 @@ i=0
 for video in videourll:
     print("==================================================================================================")
     print("下载视频网页中...")
-    vp = os.popen('''curl --keepalive-time 10  --retry-delay 3 --retry-max-time 0  --retry 100 "https://api.tzdjzu.com/index.php?nk='''+video+'''&barrage_switch="''').read()
+    vp = os.popen('''curl --keepalive-time 10 --insecure  --retry-delay 3 --retry-max-time 0  --retry 100 "https://api.tzdjzu.com/index.php?nk='''+video+'''&barrage_switch="''').read()
     print("视频网页下载成功")
     dvp=vp.find('''<source src="''')
     dvep=vp.find('''" onerror="load_fail[0]()">''')
