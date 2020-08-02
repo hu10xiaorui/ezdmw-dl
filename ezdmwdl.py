@@ -2,13 +2,14 @@ import os
 import platform
 import re
 import webbrowser
+import wget
 if platform.system() == "Windows":
     cpt = os.popen('''chcp''').read()
     cp = re.sub('[^0-9]','', cpt)
     os.system("chcp 936")
 vidl = input("输入番剧链接：")
 hv = int(input("输入集数："))
-browser = input("使用浏览器下载？（y/n）：").lower()
+browser = input("使用浏览器下载？(建议使用浏览器)（y/n）：").lower()
 # vids = vidl.find("html5/")
 # vide = vidl.find(".html")
 # vid = vidl[vids+6:vide]
@@ -41,7 +42,8 @@ for video in videourll:
     if browser == "y":
         webbrowser.open(vp[dvp+13:dvep])
     else:
-        os.system('''curl --keepalive-time 10  --retry-delay 3 --retry-max-time 0 --retry 100 -o '''+str(hv-i)+'''.mp4 "'''+vp[dvp+13:dvep]+'''"''')
+        wget.download(vp[dvp+13:dvep], str(hv-i)+".mp4")
+        #os.system('''curl --keepalive-time 10  --retry-delay 3 --retry-max-time 0 --retry 100 -o '''+str(hv-i)+'''.mp4 "'''+vp[dvp+13:dvep]+'''"''')
     print("视频下载成功")
     i=i+1
 if platform.system() == "Windows":

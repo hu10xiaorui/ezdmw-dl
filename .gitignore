@@ -3,3 +3,4 @@ test*
 *.mp4
 *.exe
 /build
+*.tmp
